@@ -1,0 +1,20 @@
+[Unit]
+Description=OpenSSH private key agent
+Wants=environment.target
+Before=environment.target
+IgnoreOnIsolate=true
+
+[Service]
+Type=forking
+Environment=SSH_AUTH_SOCK=%t/ssh-agent.socket
+#PIDFile=%t/ssh-agent.pid
+ExecStart=/usr/bin/ssh-agent -a $SSH_AUTH_SOCK -t 3h
+ExecStartPost=/usr/bin/systemctl --user set-environment SSH_AUTH_SOCK=${SSH_AUTH_SOCK}
+#ExecStartPost=/bin/sh -c "ps x -o pid,comm|sed -n '/ssh-agent/h;$!b;g;s/[^[:digit:]]//g;p'
+ExecStartPost=/bin/sh -c "pgrep ssh-agent | tail -1 > %t/ssh-agent.pid"
+#ExecStartPost=/usr/bin/ssh-add %h/.ssh/prv/*
+ExecStop=/bin/pkill --pidfile=%t/ssh-agent.pid
+ExecStopPost=/bin/rm %t/ssh-agent.pid
+
+[Install]
+WantedBy=default.target
