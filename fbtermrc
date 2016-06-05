@@ -1,0 +1,16 @@
+# Configuration for FbTerm
+
+font-names=LiberationMono
+font-size=12
+#font-width=
+#font-height=
+color-foreground=7
+color-background=0
+history-lines=10000
+text-encodings=UTF-8
+cursor-shape=0
+cursor-interval=500
+word-chars=._-
+screen-rotate=0
+input-method=
+#ambiguous-wide=yes
