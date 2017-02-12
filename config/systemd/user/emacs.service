@@ -4,7 +4,7 @@ After=ssh-agent.service
 
 [Service]
 Type=forking
-ExecStart=/usr/bin/emacs --daemon=systemd.service
+ExecStart=/usr/bin/emacs --daemon=systemd-user.service
 ExecStop=/usr/bin/emacsclient --eval "(kill-emacs)"
 Environment=SSH_AUTH_SOCK=%t/ssh-agent.socket
 Restart=always
