@@ -137,9 +137,9 @@ batterywidget:set_text(" [ Battery ] ")
 batterywidgettimer = timer({ timeout = 5 })
 batterywidgettimer:connect_signal("timeout",
   function()
-	fh = assert(io.popen("acpi | cut -d, -f 2,3 - | sed 's/, rate information unavailable//'", "r"))
-	batterywidget:set_text(" [ " .. fh:read("*l") .. " ] ")
-	fh:close()
+    fh = assert(io.popen("acpi | cut -d, -f 2,3 - | sed 's/, rate information unavailable//'", "r"))
+    batterywidget:set_text(" [ " .. fh:read("*l") .. " ] ")
+    fh:close()
   end
 )
 batterywidgettimer:start()
@@ -242,8 +242,8 @@ awful.screen.connect_for_each_screen(function(s)
             layout = wibox.layout.fixed.horizontal,
             mykeyboardlayout,
             wibox.widget.systray(),
-			notmuchwidget,
-			batterywidget,
+            notmuchwidget,
+            batterywidget,
             mytextclock,
             s.mylayoutbox,
         },
@@ -357,14 +357,16 @@ globalkeys = awful.util.table.join(
               {description = "lua execute prompt", group = "awesome"}),
     -- Menubar
     awful.key({ modkey }, "p", function() menubar.show() end,
-	   {description = "show the menubar", group = "launcher"}),
+       {description = "show the menubar", group = "launcher"}),
 
 
-	-- User defs
-	awful.key({ modkey }, "e", function() awful.spawn("emacsclient --socket-name=systemd-user.service -c") end,
-	   {description = "start emacsclient", group = launcher }),
-	awful.key({ modkey, "Shift" }, "e", function() awful.spawn("emacs") end,
-	   {description = "start emacs", group = launcher })
+    -- User defs
+    awful.key({ modkey }, "e", function() awful.spawn("emacsclient --socket-name=systemd-user.service -c") end,
+       {description = "start emacsclient", group = launcher }),
+    awful.key({ modkey, "Shift" }, "e", function() awful.spawn("emacs") end,
+       {description = "start emacs", group = launcher }),
+    awful.key({ }, "Print", function() awful.spawn("deepin-screenshot") end,
+       {description = "launch deepin-screenshot", group = launcher })
 )
 
 clientkeys = awful.util.table.join(
