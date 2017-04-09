@@ -1,0 +1,9 @@
+[Unit]
+Description=Notmuch mail indexing and retrieval service
+
+[Service]
+Type=oneshot
+ExecStart=/usr/bin/notmuch new
+
+[Install]
+WantedBy=default.target

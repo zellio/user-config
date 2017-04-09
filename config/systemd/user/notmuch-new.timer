@@ -1,0 +1,8 @@
+[Unit]
+Description=Notmuch mail indexing and retrieval service timer
+
+[Timer]
+OnUnitActiveSec=5min
+
+[Install]
+WantedBy=timers.target
