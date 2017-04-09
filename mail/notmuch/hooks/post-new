@@ -1,0 +1,18 @@
+#!/usr/bin/env bash
+
+maildir="$(notmuch config get database.path)"
+
+cd "$maildir"
+
+notmuch tag --batch <<EOF
+
+-new -- tag:new
+
+-inbox +archive -- not tag:unread and date:..three-months and not tag:archive
+
+EOF
+
+if (( $(git status --porcelain | wc -l) )); then
+	git add --all
+	git commit --message 'notmuch hook: post-new'
+fi

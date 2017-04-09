@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+
+maildir="$(notmuch config get database.path)"
+
+cd "$maildir"
+
+if (( $(git status --porcelain | wc -l) )); then
+	git add --all
+	git commit --message 'notmuch hook: pre-new'
+fi
+
+mbsync --all --verbose
