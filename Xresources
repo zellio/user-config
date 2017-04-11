@@ -1,0 +1,16 @@
+! xterm -----------------------------------------------------------------------
+xterm*VT100.geometry: 80x25
+xterm*scrollKey: true
+xterm*scrollBar: false
+xterm*toolBar: false
+xterm*eightBitInput: true
+xterm*saveLines: 10000
+xterm*metaSendsEscape: true
+xterm*termName: xterm-256color
+xterm*faceName: Liberation Mono:size=11
+xterm*locale: true 
+xterm*utf8: 2
+xterm*dynamicColors: true
+xterm*selectToClipboard: true
+xterm*foreground: grey
+xterm*background: black
