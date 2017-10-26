@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+
+/usr/bin/xautolock \
+    -time 5 \
+    -locker "i3lock --color=000000 --ignore-empty-password --show-failed-attempts" \
+    -notify 30 \
+    -notifier "notify-send --urgency=critical --expire-time=10000 -- Locking screen in 30 seconds'"
