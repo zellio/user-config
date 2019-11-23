@@ -1,7 +1,7 @@
 [alias]
 	lg = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --all --
 	ls = ls-files
-	up = '!git remote update -p; git merge --ff-only @{u}'
+	up = "!git remote update -p; git merge --ff-only @{u}"
 
 [color]
 	 ui = auto
