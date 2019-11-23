@@ -1,0 +1,59 @@
+[alias]
+	lg = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --all --
+	ls = ls-files
+	up = '!git remote update -p; git merge --ff-only @{u}'
+
+[color]
+	 ui = auto
+
+[core]
+	compression = 9
+	editor = emacs
+	pager = less
+	whitespace = warn,blank-at-eol,blank-at-eof,space-before-tab,trailing-space,cr-at-eol
+	excludesfile = ~/.gitignore
+
+[diff]
+	mnemonicPrefix = true
+	renames = copy
+
+[difftool]
+	prompt = false
+
+[gc]
+	auto = 4096
+
+[github]
+	user = zellio
+
+[grep]
+	lineNumber = true
+	patternType = perl
+
+[gui]
+	diffcontext = 3
+
+[log]
+	abbrevCommit = true
+	decorate = true
+	follow = true
+
+[merge]
+	ff = false
+
+[push]
+	followTags = true
+
+[url "ssh://git@github.com"]
+	 insteadOf = gh:
+
+[url "ssh://git@gist.github.com"]
+	 insteadOf = gist:
+
+[url "ssh://git@bitbucket.com"]
+	 insteadOf = bb:
+
+[user]
+	name = Zachary Elliott
+	email = contact@zell.io
+	username = zellio
