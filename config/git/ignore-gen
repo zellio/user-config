@@ -1,0 +1,17 @@
+#!/usr/bin/env zsh
+
+XDG_CONFIG_HOME="${XDG_CONFIG_HOME:-"${HOME}/.config"}"
+XDG_DATA_HOME="${XDG_DATA_HOME:-"$HOME/.local/share"}"
+
+declare ignore_repo='https://github.com/github/gitignore'
+declare ignore_dir="$XDG_DATA_HOME"/gitignore
+
+if [ ! -d "$ignore_dir" ]; then
+    mkdir -p "$(dirname "$ignore_dir")"
+    git clone "$ignore_repo" "$ignore_dir"
+else (
+    cd "$ignore_dir" || exit 1
+    git up
+) fi
+
+cat "$ignore_dir"/**/*.gitignore(.) >"${XDG_CONFIG_HOME}/git/ignore"

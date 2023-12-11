@@ -1,0 +1,111 @@
+[alias]
+lg = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --all --
+ls = ls-files
+up = "!git remote update -p; git merge --ff-only @{u}"
+delete-merged = !sh -c 'git branch --merged | grep -v -e main -e master | xargs -n1 git branch -d'
+
+[blame]
+coloring = repeatedLines
+showEmail = true
+
+[branch]
+autoSetupMerge = true
+autosetuprebase = always
+
+[checkout]
+defaultRemote = true
+workers = 0
+thresholdForParallelism = 128
+
+[clean]
+requireForce = false
+
+[clone]
+defaultRemoteName = origin
+
+[color]
+ui = auto
+
+[core]
+compression = 9
+looseCompression = 9
+editor = emacs -nw
+excludesfile = ~/.config/git/ignore
+pager = most
+whitespace = warn,blank-at-eol,blank-at-eof,space-before-tab,trailing-space,cr-at-eol
+abbrev = 12
+
+[diff]
+autoRefreshIndex = true
+relative = false
+renameLimit = 1024
+renames = copy
+algorithm = histogram
+mnemonicPrefix = true
+
+[difftool]
+prompt = false
+
+[fetch]
+recurseSubmodules = true
+fsckObjects = true
+prune = true
+pruneTags = true
+parallel = 0
+
+[gc]
+aggressiveDepth = 64
+aggressiveWindow = 16
+auto = 4096
+autoPackLimit = 64
+
+[grep]
+lineNumber = true
+column = true
+patternType = perl
+threads = 0
+fullName = true
+
+[init]
+defaultBranch = main
+
+[log]
+abbrevCommit = true
+decorate = true
+follow = true
+showSignature = false
+
+[merge]
+branchdesc = true
+ff = false
+verbosity = 2
+
+[pull]
+rebase = true
+
+[push]
+autoSetupRemote = true
+default = upstream
+followTags = true
+
+[stash]
+showIncludeUntracked = true
+showPatch = true
+showStat = false
+
+[status]
+relativePaths = false
+
+[url "ssh://git@github.com/"]
+insteadOf = gh:
+
+[url "ssh://git@gist.github.com/"]
+insteadOf = gist:
+
+[url "ssh://git@bitbucket.com/"]
+insteadOf = bb:
+
+[user]
+username = zellio
+email = contact@zell.io
+name = Zachary Elliott
