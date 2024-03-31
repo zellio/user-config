@@ -36,36 +36,11 @@ output "LG Electronics LG IPS FULLHD " {
     pos 5120 0
 }
 
-# exec swayidle -w \
-#          timeout 300 'swaylock -f -c 000000' \
-#          timeout 600 'swaymsg "output * power off"' resume 'swaymsg "output * power on"' \
-#          before-sleep 'swaylock -f -c 000000'
-#
-# This will lock your screen after 300 seconds of inactivity, then turn off
-# your displays after another 300 seconds, and turn your screens back on when
-# resumed. It will also lock your screen before your computer goes to sleep.
-
-### Input configuration
-#
-# Example configuration:
-#
-#   input "2:14:SynPS/2_Synaptics_TouchPad" {
-#       dwt enabled
-#       tap enabled
-#       natural_scroll enabled
-#       middle_emulation enabled
-#   }
-#
-# You can get the names of your inputs by running: swaymsg -t get_inputs
-# Read `man 5 sway-input` for more information about this section.
-
 ### Key bindings
 
 floating_modifier $mod normal
 
 bindsym $mod+Return exec $term
-
-## Switch to workspace
 
 bindsym $mod+1 workspace number 1
 bindsym $mod+2 workspace number 2
@@ -77,8 +52,6 @@ bindsym $mod+7 workspace number 7
 bindsym $mod+8 workspace number 8
 bindsym $mod+9 workspace number 9
 
-## Move focused container to workspace
-
 bindsym $mod+Shift+1 move container to workspace number 1
 bindsym $mod+Shift+2 move container to workspace number 2
 bindsym $mod+Shift+3 move container to workspace number 3
@@ -88,8 +61,6 @@ bindsym $mod+Shift+6 move container to workspace number 6
 bindsym $mod+Shift+7 move container to workspace number 7
 bindsym $mod+Shift+8 move container to workspace number 8
 bindsym $mod+Shift+9 move container to workspace number 9
-
-### Layout stuff
 
 bindsym $mod+w layout tabbed
 bindsym $mod+e layout toggle split
@@ -106,7 +77,6 @@ mode "resize" {
 }
 
 bindsym $mod+r mode "resize"
-
 
 bindsym $mod+a focus parent
 bindsym $mod+s layout stacking
@@ -125,12 +95,11 @@ bindsym $mod+space focus mode_toggle
 
 bindsym $mod+minus scratchpad show
 
-
 bindsym $mod+Shift+c kill
 
 bindsym $mod+Shift+e exec swaynag \
     -t warning \
-    -m 'You pressed the exit shortcut. Do you really want to exit sway? This will end your Wayland session.' \
+    -m 'Do you really want to exit sway? This will end your Wayland session.' \
     -B 'Yes, exit sway' \
     'swaymsg exit'
 
@@ -145,25 +114,9 @@ bindsym $mod+Shift+space floating toggle
 
 bindsym $mod+Shift+minus move scratchpad
 
-
-#
-# Status Bar:
-#
-# Read `man 5 sway-bar` for more information about this section.
 bar {
     position top
-
     swaybar_command waybar
-
-
-    # # When the status_command prints a new line to stdout, swaybar updates.
-    # # The default just shows the current date and time.
-    # status_command while date +'%Y-%m-%d %X'; do sleep 1; done
-    #
-    # colors {
-    #     statusline #ffffff
-    #     background #323232
-    # }
 }
 
-include /etc/sway/config.d/*
+include @sysconfdir@/sway/config.d/*
