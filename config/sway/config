@@ -1,0 +1,169 @@
+
+### Variables
+
+set $mod Mod4
+set $left j
+set $down k
+set $up l
+set $right semicolon
+set $term foot
+set $editor emacsclient --socket-name=systemd-user.service -c
+set $menu dmenu_path | wmenu | xargs swaymsg exec --
+
+### Outputs
+
+output * {
+    bg $XDG_DATA_HOME/background/background center
+    transform normal
+    scale 1.0
+    scale_filter nearest
+    adaptive_sync off
+    dpms on
+}
+
+output "LG Display 0x058B Unknown" {
+    mode 2560x1440@59.998Hz
+    pos 0 0
+}
+
+output "ASUSTek COMPUTER INC ROG XG279Q LBLMQS296708" {
+    mode 2560x1440@59.951Hz
+    pos 2560 0
+}
+
+output "LG Electronics LG IPS FULLHD " {
+    mode 1920x1080@60.000Hz
+    pos 5120 0
+}
+
+# exec swayidle -w \
+#          timeout 300 'swaylock -f -c 000000' \
+#          timeout 600 'swaymsg "output * power off"' resume 'swaymsg "output * power on"' \
+#          before-sleep 'swaylock -f -c 000000'
+#
+# This will lock your screen after 300 seconds of inactivity, then turn off
+# your displays after another 300 seconds, and turn your screens back on when
+# resumed. It will also lock your screen before your computer goes to sleep.
+
+### Input configuration
+#
+# Example configuration:
+#
+#   input "2:14:SynPS/2_Synaptics_TouchPad" {
+#       dwt enabled
+#       tap enabled
+#       natural_scroll enabled
+#       middle_emulation enabled
+#   }
+#
+# You can get the names of your inputs by running: swaymsg -t get_inputs
+# Read `man 5 sway-input` for more information about this section.
+
+### Key bindings
+
+floating_modifier $mod normal
+
+bindsym $mod+Return exec $term
+
+## Switch to workspace
+
+bindsym $mod+1 workspace number 1
+bindsym $mod+2 workspace number 2
+bindsym $mod+3 workspace number 3
+bindsym $mod+4 workspace number 4
+bindsym $mod+5 workspace number 5
+bindsym $mod+6 workspace number 6
+bindsym $mod+7 workspace number 7
+bindsym $mod+8 workspace number 8
+bindsym $mod+9 workspace number 9
+
+## Move focused container to workspace
+
+bindsym $mod+Shift+1 move container to workspace number 1
+bindsym $mod+Shift+2 move container to workspace number 2
+bindsym $mod+Shift+3 move container to workspace number 3
+bindsym $mod+Shift+4 move container to workspace number 4
+bindsym $mod+Shift+5 move container to workspace number 5
+bindsym $mod+Shift+6 move container to workspace number 6
+bindsym $mod+Shift+7 move container to workspace number 7
+bindsym $mod+Shift+8 move container to workspace number 8
+bindsym $mod+Shift+9 move container to workspace number 9
+
+### Layout stuff
+
+bindsym $mod+w layout tabbed
+bindsym $mod+e layout toggle split
+
+mode "resize" {
+    bindsym $left resize shrink width 10px
+    bindsym $down resize grow height 10px
+    bindsym $up resize shrink height 10px
+    bindsym $right resize grow width 10px
+
+    # Return to default mode
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+}
+
+bindsym $mod+r mode "resize"
+
+
+bindsym $mod+a focus parent
+bindsym $mod+s layout stacking
+bindsym $mod+d exec $menu
+bindsym $mod+f fullscreen
+bindsym $mod+h splith
+
+bindsym $mod+$left focus left
+bindsym $mod+$down focus down
+bindsym $mod+$up focus up
+bindsym $mod+$right focus right
+
+bindsym $mod+v splitv
+
+bindsym $mod+space focus mode_toggle
+
+bindsym $mod+minus scratchpad show
+
+
+bindsym $mod+Shift+c kill
+
+bindsym $mod+Shift+e exec swaynag \
+    -t warning \
+    -m 'You pressed the exit shortcut. Do you really want to exit sway? This will end your Wayland session.' \
+    -B 'Yes, exit sway' \
+    'swaymsg exit'
+
+bindsym $mod+Shift+r reload
+
+bindsym $mod+Shift+$left move left
+bindsym $mod+Shift+$down move down
+bindsym $mod+Shift+$up move up
+bindsym $mod+Shift+$right move right
+
+bindsym $mod+Shift+space floating toggle
+
+bindsym $mod+Shift+minus move scratchpad
+
+
+#
+# Status Bar:
+#
+# Read `man 5 sway-bar` for more information about this section.
+bar {
+    position top
+
+    swaybar_command waybar
+
+
+    # # When the status_command prints a new line to stdout, swaybar updates.
+    # # The default just shows the current date and time.
+    # status_command while date +'%Y-%m-%d %X'; do sleep 1; done
+    #
+    # colors {
+    #     statusline #ffffff
+    #     background #323232
+    # }
+}
+
+include /etc/sway/config.d/*
