@@ -1,0 +1,13 @@
+[Unit]
+Description = Emacs: the extensible, self documenting text editor
+After = ssh-agent.service
+
+[Service]
+Type = forking
+ExecStart = /usr/bin/emacs --daemon=systemd-user.service
+ExecStop = /usr/bin/emacsclient --socket-name=systemd-user.service --eval "(kill-emacs)"
+Environment = SSH_AUTH_SOCK=%t/ssh-agent.socket
+Restart = always
+
+[Install]
+WantedBy = default.target
