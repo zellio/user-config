@@ -1,20 +1,30 @@
 #!/usr/bin/env zsh
 
-set -eu -o pipefail -x
+set -eu -o pipefail
 
-declare source_dir="${0:P:h}"
+export XDG_CONFIG_HOME="${XDG_CONFIG_HOME:-"$HOME"/.config}"
 
-### Install config directories
+printf '>>> Installing XDG_CONFIG_HOME\n'
 
-for dir in "${source_dir}"/config/*(/); do
-    local target="${HOME}/.${dir:t2}"
+if [ ! -d "$XDG_CONFIG_HOME" ]; then
+	printf '  Creating XDG_CONFIG_HOME\n'
+	mkdir -p "$XDG_CONFIG_HOME"
+fi
 
-    [ -L "$target" ] && rm "$target"
+declare config_source config_target
+for config_source ( "${0:P:h}/config"/* ); do
+	config_target="${XDG_CONFIG_HOME}/${config_source:t}"
 
-    if [ -d "$target" ]; then
-        echo "Directory found, skipping $target"
-        continue
-    fi
+	if [ -L "$config_target" ]; then
+		rm -- "$config_target"
+	fi
 
-    ln -s "$dir" "$target"
+	if [ -e "$config_target" ] && ; then
+		printf '  Skipping %s, already exists\n' "${config_source:t2}"
+		continue
+	else
+		printf '  Linking %s\n' "${config_source:t2}"
+	fi
+
+	ln -s "$config_source" "$config_target"
 done
