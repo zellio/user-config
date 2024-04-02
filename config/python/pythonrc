@@ -19,10 +19,11 @@ except OSError:
     pass
 
 def write_history():
-    from os import environ, path
+    from os import environ
     from readline import write_history_file
+    from pathlib import Path
 
-    state_dir = Path(os.environ['XDG_STATE_HOME']) / 'python'
+    state_dir = Path(environ['XDG_STATE_HOME']) / 'python'
 
     if not state_dir.is_dir():
         state_dir.mkdir()
