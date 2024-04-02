@@ -2,9 +2,37 @@
 
 set -eu -o pipefail
 
+declare PROJECT_ROOT="${0:P:h}"
+
+printf '>>> Linking HOME configs\n'
+
+declare home_configs=(
+	'zshenv'
+)
+
+declare home_source home_target
+for file ( $home_configs ); do
+	home_source="${PROJECT_ROOT}/${file}"
+	home_target="${HOME}/.${file}"
+
+	if [ -L "$home_target" ]; then
+		rm -- "$home_target"
+	fi
+
+	if [ -e "$home_target" ]; then
+		printf '  Skipping %s, already exists\n' "$file"
+		continue
+	else
+		printf '  Linking %s\n' "$file"
+	fi
+
+	ln -s "$home_source" "$home_target"
+done
+
+
 export XDG_CONFIG_HOME="${XDG_CONFIG_HOME:-"$HOME"/.config}"
 
-printf '>>> Installing XDG_CONFIG_HOME\n'
+printf '>>> Linking XDG_CONFIG_HOME configs\n'
 
 if [ ! -d "$XDG_CONFIG_HOME" ]; then
 	printf '  Creating XDG_CONFIG_HOME\n'
@@ -12,7 +40,7 @@ if [ ! -d "$XDG_CONFIG_HOME" ]; then
 fi
 
 declare config_source config_target
-for config_source ( "${0:P:h}/config"/* ); do
+for config_source ( "$PROJECT_ROOT"/config/* ); do
 	config_target="${XDG_CONFIG_HOME}/${config_source:t}"
 
 	if [ -L "$config_target" ]; then
