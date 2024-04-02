@@ -1,48 +1,41 @@
+### config --- sway configuration
 
-### Variables
+## variables
 
 set $mod Mod4
 set $left j
 set $down k
 set $up l
 set $right semicolon
-set $term foot
+
 set $editor emacsclient --socket-name=systemd-user.service -c
-# set $menu dmenu_path | wmenu | xargs swaymsg exec --
-set $menu ~/.local/share/cargo/bin/kickoff
+set $layout kanshi --config=$XDG_CONFIG_HOME/kanshi/config
+set $menu $HOME/.local/share/cargo/bin/kickoff
+set $notify fnott --config=$XDG_CONFIG_HOME/fnott/fnott.ini --print-pid=$XDG_RUNTIME_DIR/fnott.pid
+set $term foot
 
-### Outputs
+## global
 
-output * {
-    bg $XDG_DATA_HOME/background/background center
-    transform normal
-    scale 1.0
-    scale_filter nearest
-    adaptive_sync off
-    dpms on
-}
-
-
-output "ASUSTek COMPUTER INC ROG XG279Q LBLMQS296708" {
-    mode 2560x1440@59.951Hz
-    pos 0 0
-}
-
-output "LG Display 0x058B Unknown" {
-    mode 2560x1440@59.998Hz
-    pos 0 1440
-}
-
-output "LG Electronics LG IPS FULLHD " {
-    mode 1920x1080@60.000Hz
-    pos 2560 0
-}
-
-### Key bindings
-
+font "Liberation Mono" 12
+default_orientation auto
+workspace_layout stacking
+xwayland enable
 floating_modifier $mod normal
 
-bindsym $mod+Return exec $term
+## modes
+
+mode "resize" {
+    bindsym $left resize shrink width 10px
+    bindsym $down resize grow height 10px
+    bindsym $up resize shrink height 10px
+    bindsym $right resize grow width 10px
+
+    # Return to default mode
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+}
+
+## binding
 
 bindsym $mod+1 workspace number 1
 bindsym $mod+2 workspace number 2
@@ -64,22 +57,14 @@ bindsym $mod+Shift+7 move container to workspace number 7
 bindsym $mod+Shift+8 move container to workspace number 8
 bindsym $mod+Shift+9 move container to workspace number 9
 
+bindsym $mod+Control+Shift+$left move workspace to output left
+bindsym $mod+Control+Shift+$down move workspace to output down
+bindsym $mod+Control+Shift+$up move workspace to output up
+bindsym $mod+Control+Shift+$right move workspace to output right
+
 bindsym $mod+w layout tabbed
 bindsym $mod+e exec $editor
-
-mode "resize" {
-    bindsym $left resize shrink width 10px
-    bindsym $down resize grow height 10px
-    bindsym $up resize shrink height 10px
-    bindsym $right resize grow width 10px
-
-    # Return to default mode
-    bindsym Return mode "default"
-    bindsym Escape mode "default"
-}
-
 bindsym $mod+r mode "resize"
-
 bindsym $mod+a focus parent
 bindsym $mod+s layout stacking
 bindsym $mod+d exec $menu
@@ -90,22 +75,19 @@ bindsym $mod+$left focus left
 bindsym $mod+$down focus down
 bindsym $mod+$up focus up
 bindsym $mod+$right focus right
-
-bindsym $mod+v layout toggle split
-
 bindsym $mod+space focus mode_toggle
+bindsym $mod+Return exec $term
 
 bindsym $mod+minus scratchpad show
 
 bindsym $mod+Shift+c kill
 
-bindsym $mod+Shift+e exec swaynag \
-    -t warning \
-    -m 'Do you really want to exit sway? This will end your Wayland session.' \
-    -B 'Yes, exit sway' \
-    'swaymsg exit'
-
+bindsym $mod+Shift+q exit
 bindsym $mod+Shift+r reload
+
+bindsym $mod+Shift+a focus child
+
+bindsym $mod+Shift+g layout default
 
 bindsym $mod+Shift+$left move left
 bindsym $mod+Shift+$down move down
@@ -116,9 +98,47 @@ bindsym $mod+Shift+space floating toggle
 
 bindsym $mod+Shift+minus move scratchpad
 
+
+## Task Bar
+
 bar {
     position top
     swaybar_command waybar
 }
 
-include @sysconfdir@/sway/config.d/*
+## fnott daemon
+
+exec $notify
+
+bindsym $mod+p exec fnottctl dismiss
+bindsym $mod+SHIFT+p exec fnottctl dismiss all
+
+## kanshi daemon
+
+exec $layout
+bindsym $mod+o exec kanshictl reload
+
+## outputs
+
+output * {
+    bg $XDG_DATA_HOME/background/background center
+    transform normal
+    scale 1.0
+    scale_filter nearest
+    adaptive_sync off
+    dpms on
+}
+
+output eDP-1 mode 2560x1440@59.998Hz pos 0,0
+
+## assignment
+
+assign [class="Emacs"] workspace number 3
+assign [class="discord"] workspace number 4
+
+## includes
+
+include $XDG_CONFIG_HOME/sway/config.d/*
+include /etc/sway/config.d/*
+
+### config ends here
