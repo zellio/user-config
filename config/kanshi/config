@@ -1,0 +1,12 @@
+profile "Laptop" {
+    exec notify-send --app-name=Kanshi --expire-time=5000 'Layout update' 'Applying kanshi profile: Laptop'
+    output "LG Display 0x058B Unknown" enable mode 2560x1440@59.998Hz position 0,0
+}
+
+profile "Desktop" {
+    exec notify-send --app-name=Kanshi --expire-time=5000 'Layout update' 'Applying kanshi profile: Desktop'
+
+    output "LG Display 0x058B Unknown" disable
+    output "ASUSTek COMPUTER INC ROG XG279Q LBLMQS296708" mode 2560x1440@59.951Hz position 0,0
+    output "LG Electronics LG IPS FULLHD " mode 1920x1080@60.000Hz position 2560,0
+}
