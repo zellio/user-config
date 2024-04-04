@@ -16,7 +16,7 @@ set $term foot
 
 ## global
 
-font "Liberation Mono" 12
+font "JuliaMono" 12
 default_orientation auto
 workspace_layout stacking
 xwayland enable

@@ -1,2 +1,2 @@
 disable_checkpoint = true
-plugin_cache_dir = ~/.cache/terraform/plugin
+plugin_cache_dir = "~/.cache/terraform/plugin"

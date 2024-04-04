@@ -5,7 +5,9 @@ prompt = ''
 padding = 100
 
 fonts = [
+    'JuliaMono',
     'Noto Sans Mono',
+    'Monospace',
 ] # list of otf or ttf fonts. later elements work as fallback
 font_size = 32.0
 
@@ -24,7 +26,7 @@ text_selected = '#4c7899ff' # for the currently selected result
 # keybindings syntax: ctrl/shift/alt/logo as modifiers and a key joined by '+' signs
 # A list of available keys can be found here: https://docs.rs/crate/x11-keysymdef/0.2.0/source/src/keysym.json
 paste = ["ctrl+v"]
-execute = ["KP_Enter", "Return"]
+execute = ["KP_Enter", "Return", "ctrl+j"]
 delete = ["KP_Delete", "Delete", "BackSpace", "ctrl+d"]
 delete_word = ["ctrl+KP_Delete", "ctrl+Delete", "ctrl+BackSpace", "alt+d"]
 complete = ["Tab"]
