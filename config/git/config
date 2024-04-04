@@ -29,7 +29,6 @@ ui = auto
 [core]
 compression = 9
 looseCompression = 9
-editor = emacs -nw
 excludesfile = ~/.config/git/ignore
 pager = most
 whitespace = warn,blank-at-eol,blank-at-eof,space-before-tab,trailing-space,cr-at-eol
