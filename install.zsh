@@ -56,3 +56,31 @@ for config_source ( "$PROJECT_ROOT"/config/* ); do
 
 	ln -s "$config_source" "$config_target"
 done
+
+if [ "$(uname -s)" = 'Darwin' ]; then
+	if [ ! -d "$HOME"/Library/LaunchAgents ]; then
+		mkdir -p "$HOME"/Library/LaunchAgents
+	fi
+
+	printf '>>> Linking launchd agents plists\n'
+
+	declare launch_agent_source launch_agent_target
+	for launch_agent_source ( "$PROJECT_ROOT"/Library/LaunchAgents/*.plist ); do
+		launch_agent_target="${HOME}/Library/LaunchAgents/${launch_agent_source:t}"
+
+		if [ -L "$launch_agent_target" ]; then
+			rm -- "$launch_agent_target"
+		fi
+
+		if [ -e "$launch_agent_target" ]; then
+			printf '  Skipping %s, already exists\n' "${launch_agent_target:t}"
+			continue
+		fi
+
+		printf '  Linking %s\n' "${launch_agent_target:t}"
+
+		ln -s "$launch_agent_source" "$launch_agent_target"
+	done
+fi
+
+### install.zsh ends here

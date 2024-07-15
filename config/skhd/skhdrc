@@ -1,0 +1,77 @@
+
+cmd + shift - r : launchctl kickstart -k "gui/${UID}/com.koekeishiya.yabai"; launchctl kickstart -k "gui/${UID}/com.koekeishiya.skhd"
+
+cmd - 1 : yabai --message space --focus 1
+cmd - 2 : yabai --message space --focus 2
+cmd - 3 : yabai --message space --focus 3
+cmd - 4 : yabai --message space --focus 4
+cmd - 5 : yabai --message space --focus 5
+cmd - 6 : yabai --message space --focus 6
+cmd - 7 : yabai --message space --focus 7
+cmd - 8 : yabai --message space --focus 8
+cmd - 9 : yabai --message space --focus 9
+
+cmd + shift - 1 : yabai --message window --space 1
+cmd + shift - 2 : yabai --message window --space 2
+cmd + shift - 3 : yabai --message window --space 3
+cmd + shift - 4 : yabai --message window --space 4
+cmd + shift - 5 : yabai --message window --space 5
+cmd + shift - 6 : yabai --message window --space 6
+cmd + shift - 7 : yabai --message window --space 7
+cmd + shift - 8 : yabai --message window --space 8
+cmd + shift - 9 : yabai --message window --space 9
+
+# cmd - q :
+# cmd - w :
+# cmd - e : /Applications/Emacs.app/Contents/MacOS/Emacs
+# cmd - r :
+# cmd - t :
+# cmd - y :
+# cmd - u :
+# cmd - i :
+# cmd - o :
+# cmd - p :
+# cmd - \ :
+# cmd - a :
+# cmd - s :
+# cmd - d :
+# cmd - f :
+# cmd - g :
+# cmd - h :
+# cmd - j :
+# cmd - k :
+# cmd - l :
+# cmd - ; :
+# cmd - ' :
+# cmd - z :
+# cmd - x :
+# cmd - c :
+# cmd - v :
+# cmd - b :
+# cmd - n :
+# cmd - m :
+# cmd - , :
+# cmd - . :
+# cmd - / :
+
+
+# cmd + shift - e : /Applications/Emacs.app/Contents/MacOS/Emacs
+# cmd - return : ~/.config/yabai/scripts/iterm2.scpt
+#
+# cmd - j : yabai --message window --focus west || yabai --message window --focus last
+# cmd - k : yabai --message window --focus stack.next || yabai --message window --focus south
+# cmd - l : yabai --message window --focus stack.prev || yabai --message window --focus north
+# cmd - 0x003B : yabai --message window --focus east || yabai --message window --focus first
+#
+# cmd + shift - j : yabai --message window --warp west || yabai --message window --warp last
+# cmd + shift - k : yabai --message window --warp stack.next || yabai --message window --warp south
+# cmd + shift - l : yabai --message window --warp stack.prev || yabai --message window --warp north
+# cmd + shift - 0x003B : yabai --message window --warp east || yabai --message window --warp first
+#
+# cmd - left : yabai --message space --focus prev
+# cmd - right : yabai --message space --focus next
+
+# bindsym $mod+Shift+$left move left
+# bindsym $mod+Shift+$down move down
+# bindsym $mod+Shift+$up move up
+# bindsym $mod+Shift+$right move right
