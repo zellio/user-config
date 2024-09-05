@@ -1,0 +1,5 @@
+build --repository_cache=~/.cache/bazel/disk/repo
+build --disk_cache=~/.cache/bazel/disk/action
+
+test --test_output=errors
+test --nocache_test_results

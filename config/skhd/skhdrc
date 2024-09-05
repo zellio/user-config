@@ -1,0 +1,31 @@
+cmd + shift - 1 : yabai --message window --space 1
+cmd + shift - 2 : yabai --message window --space 2
+cmd + shift - 3 : yabai --message window --space 3
+cmd + shift - 4 : yabai --message window --space 4
+cmd + shift - 5 : yabai --message window --space 5
+cmd + shift - 6 : yabai --message window --space 6
+cmd + shift - 7 : yabai --message window --space 7
+cmd + shift - 8 : yabai --message window --space 8
+cmd + shift - 0 : yabai --message window --space 10
+
+cmd + ctrl - w : /opt/homebrew/bin/yabai --message space --layout 'bsp'
+cmd - e : /opt/homebrew/bin/emacsclient --socket-name=launchd-user.plist --create-frame
+
+cmd + ctrl - o : /opt/homebrew/bin/yabai --message display --focus next || /opt/homebrew/bin/yabai --message display --focus first
+cmd + ctrl + shift - o : /opt/homebrew/bin/yabai --message display --focus prev || /opt/homebrew/bin/yabai --message display --focus last
+
+cmd + ctrl - s : /opt/homebrew/bin/yabai --message space --layout 'stack'
+
+cmd + ctrl - f : /opt/homebrew/bin/yabai --message window --toggle zoom-fullscreen
+cmd - g : ~/.config/yabai/scripts/split-vertical.bash
+cmd - h : ~/.config/yabai/scripts/split-horizontal.bash
+cmd - j : /opt/homebrew/bin/yabai --message window --focus west || /opt/homebrew/bin/yabai --message window --focus last
+cmd - k : /opt/homebrew/bin/yabai --message window --focus stack.next || /opt/homebrew/bin/yabai --message window --focus south
+cmd - l : /opt/homebrew/bin/yabai --message window --focus stack.prev || /opt/homebrew/bin/yabai --message window --focus north
+cmd - 0x003B : /opt/homebrew/bin/yabai --message window --focus east || /opt/homebrew/bin/yabai --message window --focus first
+
+cmd - return : ~/.config/yabai/scripts/iterm2.scpt
+
+cmd + shift - e : /opt/homebrew/bin/emacs
+
+cmd + shift - r : launchctl kickstart -k "gui/${UID}/com.koekeishiya.yabai"; launchctl kickstart -k "gui/${UID}/com.koekeishiya.skhd"

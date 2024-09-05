@@ -1,0 +1,127 @@
+{
+    "layer": "top",
+    "position": "top",
+    "height": 30,
+    "spacing": 0,
+    "modules-left": [
+        "sway/workspaces",
+        "sway/mode",
+        "sway/window"
+    ],
+    "sway/workspaces": {
+        "all-outputs": false,
+        "disable-scroll": true,
+        "format": "{icon}",
+        "format-icons": {
+            "1": "󰴃",
+            "2": "󰖟",
+            "3": "",
+            "4": "",
+            "5": "",
+            "urgent": ""
+        },
+        "sort-by-number": true
+    },
+    "sway/mode": {
+        "format": "<span style=\"italic\">{}</span>"
+    },
+    "sway/window": {
+        "max-length": 256,
+    },
+    "modules-center": [],
+    "modules-right": [
+        "tray",
+        "pulseaudio",
+        "network",
+        "cpu",
+        "memory",
+        "battery",
+        "idle_inhibitor",
+        "clock#date",
+        "clock#time"
+    ],
+    "tray": {
+        "icon-size": 18,
+        "spacing": 1
+    },
+    "pulseaudio": {
+        "format": "{icon}",
+        "format-bluetooth": "{icon}",
+        "format-muted": "󰝟",
+        "format-icons": {
+            "default": ["󰕿", "󰖀", "󰕾"]
+        },
+        "scroll-step": 1,
+        "on-click": "pavucontrol",
+        "tooltip": true,
+        "tooltip-format": "{desc} - {volume}%",
+        "scroll-step": 3,
+        "on-click-right": "amixer set Master toggle",
+        "ignored-sinks": ["Easy Effects Sink"]
+    },
+    "network": {
+        "format-wifi": " {essid}",
+        "format-ethernet": "󰌘 {ifname}",
+        "format-disconnected": "󰌙",
+        "tooltip-format": "{ifname}: {ipaddr}",
+        "on-click": "foot /usr/bin/zsh -c nmtui"
+    },
+    "cpu": {
+        "interval": 1,
+        "format": "{icon0}{icon1}{icon2}{icon3}{icon4}{icon5}{icon6}{icon7}",
+        "format-icons": [
+            "<span color='#69ff94'>▁</span>",
+            "<span color='#2aa9ff'>▂</span>",
+            "<span color='#f8f8f2'>▃</span>",
+            "<span color='#f8f8f2'>▄</span>",
+            "<span color='#ffffa5'>▅</span>",
+            "<span color='#ffffa5'>▆</span>",
+            "<span color='#ff9977'>▇</span>",
+            "<span color='#dd532e'>█</span>"
+        ]
+    },
+    "memory": {
+        "interval": 30,
+        "states": {
+            "warning": 75,
+            "critical": 95
+        },
+        "format": "{}% ",
+        "tooltip-format": "{used:0.1f}G/{total:0.1f}G",
+        "max-length": 10
+    },
+    "battery": {
+        "interval": 60,
+        "states": {
+            "warning": 25,
+            "critical": 10
+        },
+        "format": "󱐋 {capacity}%",
+        "format-discharging": "{icon} {capacity}%",
+        "format-icons": [
+            "",
+            "",
+            "",
+            "",
+            ""
+        ],
+        "tooltip": true
+    },
+    "idle_inhibitor": {
+        "format": "{icon}",
+        "format-icons": {
+            "activated": "",
+            "deactivated": ""
+        }
+    },
+    "clock#time": {
+        "interval": 1,
+        "format": "{:%H:%M:%S}",
+        "tooltip": false
+    },
+    "clock#date": {
+        "interval": 300,
+        "format": "{:%b %e}",
+        "tooltip-format": "<tt>{calendar}</tt>"
+    }
+}
