@@ -1,0 +1,129 @@
+[alias]
+lg = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --all --
+ls = ls-files
+up = "!git remote update -p; git merge --ff-only @{u}"
+delete-merged = !sh -c 'git branch --merged | grep -v -e main -e master | xargs -n1 git branch -d'
+
+[blame]
+blankBoundary = true
+coloring = repeatedLines
+showEmail = true
+markUnblamableLines = true
+markIgnoredLines = true
+
+[branch]
+autoSetupMerge = simple
+autoSetupRebase = always
+
+[checkout]
+defaultRemote = origin
+workers = -1
+thresholdForParallelism = 128
+
+[clone]
+defaultRemoteName = origin
+
+[color]
+ui = auto
+
+[column]
+ui = auto
+
+[core]
+fileMode = true
+trustctime = true
+eol = lf
+compression = 9
+looseCompression = 9
+whitespace = warn,blank-at-eol,space-before-tab,blank-at-eof,cr-at-eol
+abbrev = 12
+
+[diff]
+autoRefreshIndex = true
+relative = false
+mnemonicPrefix = true
+relative = false
+algorithm = histogram
+
+[difftool]
+prompt = false
+
+[fetch]
+prune = true
+pruneTags = true
+all = true
+parallel = 0
+
+[gc]
+aggressiveDepth=32
+aggressiveWindow=256
+auto = 4096
+autoPackLimit = 64
+
+[grep]
+lineNumber = true
+patternType = perl
+threads = 0
+fullName = true
+
+[help]
+autoCorrect = prompt
+
+[index]
+threads = 0
+
+[init]
+defaultBranch = main
+
+[log]
+abbrevCommit = true
+decorate = true
+follow = true
+showSignature = false
+
+[merge]
+branchdesc = true
+ff = false
+verbosity = 2
+autoStash = true
+
+[pull]
+ff = true
+rebase = true
+
+[push]
+autoSetupRemote = true
+default = current
+followTags = true
+
+[rebase]
+autoStash = true
+missingCommitsCheck = warn
+
+[stash]
+showIncludeUntracked = true
+showPatch = true
+showStat = false
+
+[status]
+branch = true
+showUntrackedFiles = all
+relativePaths = false
+
+[user]
+useConfigOnly = true
+username = zellio
+name = Zachary Elliott
+email = contact@zell.io
+
+[url "ssh://git@github.com/"]
+insteadOf = gh:
+
+[url "ssh://git@gist.github.com/"]
+insteadOf = gist:
+
+[url "ssh://git@bitbucket.com/"]
+insteadOf = bb:
+
+[include]
+path = local-config
