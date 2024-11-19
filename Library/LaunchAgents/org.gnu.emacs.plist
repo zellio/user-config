@@ -6,11 +6,8 @@
     <string>org.gnu.emacs</string>
     <key>ProgramArguments</key>
     <array>
-      <string>/opt/homebrew/bin/zsh</string>
-      <string>--interactive</string>
-      <string>--login</string>
-      <string>-c</string>
-      <string>/opt/homebrew/bin/emacs --fg-daemon=launchd-user.plist</string>
+      <string>/opt/homebrew/bin/emacs</string>
+      <string>--fg-daemon=launchd-user.plist</string>
     </array>
     <key>RunAtLoad</key>
     <true/>
