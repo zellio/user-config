@@ -1,0 +1,40 @@
+[settings]
+activate_aggressive = false
+all_compile = false
+always_keep_download = false
+always_keep_install = false
+auto_install = true
+cache_prune_age = "7d"
+color = true
+default_config_filename = "mise.toml"
+default_tool_versions_filename = ".tool-versions"
+http_timeout = "10s"
+idiomatic_version_file_enable_tools = ["go"]
+
+[[tools."aqua:atuinsh/atuin"]]
+    version = "latest"
+
+[[tools."asdf:mise-plugins/mise-tmux"]]
+    version = "latest"
+
+[[tools.starship]]
+    version = "latest"
+
+[[tools.go]]
+    version = "latest"
+
+[[tools.poetry]]
+    version = "latest"
+
+[[tools.python]]
+    version = "latest"
+    default_packages = ""
+
+[[tools.ruby]]
+    version = "latest"
+
+[[tools.rust]]
+    version = "latest"
+    cargo_home = "~/.local/share/cargo"
+    rustup_home = "~/.local/share/rustup"
+    components = "cargo,clippy,rust-analysis,rust-analyzer,rust-docs,rust-src,rust-std,rustc,rustfmt"
