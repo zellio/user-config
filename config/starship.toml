@@ -1,0 +1,71 @@
+"$schema" = 'https://starship.rs/config-schema.json'
+
+add_newline = false
+format = '[\(](comment)●●[\)](comment) $username[@](comment)$hostname[:](comment)$directory( [\[](comment)$git_branch$git_commit$git_status[\]](comment)) $character'
+palette = "dracula"
+
+[username]
+show_always = true
+style_user = "fg:cyan"
+style_root = ""
+format = '[$user]($style)'
+
+[hostname]
+ssh_only = false
+format = '[$hostname](bold $style)'
+style = 'fg:orange'
+
+[directory]
+format = '[$path]($style)([$read_only]($style))'
+style = "fg:purple"
+read_only = ''
+truncation_length = 1
+fish_style_pwd_dir_length = 1
+truncate_to_repo = false
+truncation_symbol = ''
+home_symbol = '~'
+
+[git_branch]
+symbol = ''
+format = '[$symbol](orange) [$branch(:$remote_branch)]($style)'
+style = 'fg:green'
+
+[git_commit]
+commit_hash_length = 8
+tag_disabled = false
+tag_symbol = ''
+style = 'fg:green'
+format = '([:](comment)[$hash]($style))([:](comment)[$tag]($style))'
+
+[git_status]
+style = 'fg:green'
+format = '( ${ahead_behind})( ${untracked}${deleted}${renamed}${modified}${staged}${conflicted})'
+ignore_submodules = true
+ahead = '[${count}](fg:green)'
+behind = '[${count}](fg:green)'
+diverged = '[${ahead_count}](fg:green)[/](comment)[$behind_count](fg:green)'
+untracked = '[■](red)'
+deleted = '[■](pink)'
+renamed = '[■](orange)'
+modified = '[■](yellow)'
+staged = '[■](green)'
+conflicted = '[■](cyan)'
+
+[character]
+disabled = false
+success_symbol = '[%](fg:comment)'
+error_symbol = '[%](fg:red)'
+
+[palettes.dracula]
+background = '#282a36'
+current_line = '#44475a'
+selection = '#44475a'
+foreground = '#f8f8f2'
+comment = '#6272a4'
+cyan = '#8be9fd'
+green = '#50fa7b'
+orange = '#ffb86c'
+pink = '#ff79c6'
+purple = '#bd93f9'
+red = '#ff5555'
+yellow = '#f1fa8c'
