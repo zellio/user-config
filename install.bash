@@ -21,23 +21,35 @@ PROJECT_ROOT="${PROJECT_ROOT:-"$(
 	command cd -- "$(command dirname -- "${BASH_SOURCE[0]}")" && command pwd -P
 )"}"
 
+function print_header
+{
+	local msg="$*"
+	printf $'\e[38;2;0;255;0m==>\e[0m %s\n' "$msg"
+}
+
+function report_action
+{
+	local msg="$*"
+	printf $'  \e[38;2;0;0;255m->\e[0m %s\n' "$msg"
+}
+
 function main
 {
-	printf $'\e[38;2;255;255;255m>>>\e[0m Building config map\n'
+	print_header 'Building config map'
 
 	local -A configs=(
 		["$HOME"/repos/zellio/zdotdir]="$HOME"/.config/zsh
 		["$HOME"/repos/zellio/emacs-config]="$HOME"/.config/emacs
 	)
 
-	printf '  Adding home directory configs\n'
+	report_action 'Adding home directory configs'
 
 	local -a home_directory_configs=(
 		'ssh/config'
 		'zshenv'
 	)
 
-	printf '  Adding xdg_config directory configs\n'
+	report_action 'Adding xdg_config directory configs'
 
 	local config
 	for config in "${home_directory_configs[@]}"; do
@@ -49,14 +61,14 @@ function main
 	done
 
 	if [ "$(uname -s)" = 'Darwin' ]; then
-		printf '  Adding launch agent configs\n'
+		report_action 'Adding launch agent configs'
 
 		for config in "$PROJECT_ROOT"/Library/LaunchAgents/*.plist; do
 			configs[$config]="${HOME}/Library/LaunchAgents/$(command basename -- "$config")"
 		done
 	fi
 
-	printf $'\e[38;2;255;255;255m>>>\e[0m Linking config files\n'
+	print_header 'Linking config files'
 
 	local source_path target_path
 	for source_path in "${!configs[@]}"; do
@@ -67,9 +79,9 @@ function main
 		fi
 
 		if [ -e "$target_path" ]; then
-			printf '  %s already exists, skipping\n' "$target_path"
+			printf '  %s already exists, skipping' "$target_path"
 		else
-			printf '  Linking %s\n' "$target_path"
+			report_action "Linking $target_path"
 			command ln --symbolic -- "$source_path" "$target_path"
 		fi
 	done
