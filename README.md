@@ -6,11 +6,11 @@ own repositories.
 
 ## Emacs Config
 
-Emacs config is located in its own [repo][1].
+Emacs config is located in its own [repo][emacs].
 
 ## ZSH Config
 
-`zsh` shell config is located its own [repo][2].
+`zsh` shell config is located its own [repo][zsh].
 
-[1]: https://github.com/zellio/zdotdir
-[2]: https://github.com/zellio/emacs-config
+[emacs]: https://github.com/zellio/emacs-config
+[zsh]: https://github.com/zellio/zdotdir
