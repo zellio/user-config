@@ -38,3 +38,6 @@ idiomatic_version_file_enable_tools = ["go"]
     cargo_home = "~/.local/share/cargo"
     rustup_home = "~/.local/share/rustup"
     components = "cargo,clippy,rust-analysis,rust-analyzer,rust-docs,rust-src,rust-std,rustc,rustfmt"
+
+[[tools.usage]]
+    version = "latest"

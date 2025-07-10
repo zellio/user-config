@@ -12,7 +12,7 @@ format = '[$user]($style)'
 
 [hostname]
 ssh_only = false
-format = '[$hostname](bold $style)'
+format = '[$hostname]($style)'
 style = 'fg:orange'
 
 [directory]
