@@ -2,16 +2,18 @@
 ## linux/mac: ~/.local/share/atuin/history.db
 ## windows: %USERPROFILE%/.local/share/atuin/history.db
 # db_path = "~/.history.db"
+db_path = "~/.local/state/atuin/history.db"
 
 ## where to store your encryption key, default is your system data directory
 ## linux/mac: ~/.local/share/atuin/key
 ## windows: %USERPROFILE%/.local/share/atuin/key
-# key_path = "~/.key"
+key_path = "~/.local/share/atuin/key"
 
 ## where to store your auth session token, default is your system data directory
 ## linux/mac: ~/.local/share/atuin/session
 ## windows: %USERPROFILE%/.local/share/atuin/session
 # session_path = "~/.session"
+session_path = "~/.local/state/atuin/session"
 
 ## date format used, either "us" or "uk"
 # dialect = "us"
@@ -38,7 +40,7 @@ auto_sync = false
 
 ## which search mode to use
 ## possible values: prefix, fulltext, fuzzy, skim
-# search_mode = "fuzzy"
+search_mode = "fuzzy"
 
 ## which filter mode to use
 ## possible values: global, host, session, directory
@@ -46,7 +48,7 @@ auto_sync = false
 
 ## With workspace filtering enabled, Atuin will filter for commands executed
 ## in any directory within a git repository tree (default: false)
-# workspaces = false
+workspaces = true
 
 ## which filter mode to use when atuin is invoked from a shell up-key binding
 ## the accepted values are identical to those of "filter_mode"
@@ -81,7 +83,7 @@ invert = true
 # word_jump_mode = "emacs"
 
 ## characters that count as a part of a word
-# word_chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
+word_chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789*?_-.[]~&;!#$%^(){}<>"
 
 ## number of context lines to show when scrolling by pages
 # scroll_context_lines = 1
@@ -101,9 +103,6 @@ invert = true
 history_filter = [
     "^[[:space:]]",
 ]
-#   "^secret-cmd",
-#   "^innocuous-cmd .*--secret=.+",
-# ]
 
 ## prevent commands run with cwd matching any of these regexes from being written
 ## to history. Note that these regular expressions are unanchored, i.e. if they don't
@@ -164,37 +163,42 @@ enter_accept = true
 
 [stats]
 ## Set commands where we should consider the subcommand for statistics. Eg, kubectl get vs just kubectl
-# common_subcommands = [
-#   "apt",
-#   "cargo",
-#   "composer",
-#   "dnf",
-#   "docker",
-#   "git",
-#   "go",
-#   "ip",
-#   "kubectl",
-#   "nix",
-#   "nmcli",
-#   "npm",
-#   "pecl",
-#   "pnpm",
-#   "podman",
-#   "port",
-#   "systemctl",
-#   "tmux",
-#   "yarn",
-# ]
+common_subcommands = [
+    "apt",
+    "asdf",
+    "bazel",
+    "bazelisk",
+    "brew",
+    "cargo",
+    "composer",
+    "dnf",
+    "docker",
+    "git",
+    "go",
+    "ip",
+    "kubectl",
+    "mise",
+    "nix",
+    "nmcli",
+    "npm",
+    "pecl",
+    "pnpm",
+    "podman",
+    "port",
+    "systemctl",
+    "tmux",
+    "yarn",
+]
 
 ## Set commands that should be totally stripped and ignored from stats
 # common_prefix = ["sudo"]
 
 ## Set commands that will be completely ignored from stats
-# ignored_commands = [
-#   "cd",
-#   "ls",
-#   "vi"
-# ]
+ignored_commands = [
+    "echo",
+    "cd",
+    "ls",
+]
 
 [keys]
 # Defaults to true. If disabled, using the up/down key won't exit the TUI when scrolled past the first/last entry.
@@ -223,7 +227,7 @@ records = true
 ## The path to the unix socket used by the daemon (on unix systems)
 ## linux/mac: ~/.local/share/atuin/atuin.sock
 ## windows: Not Supported
-# socket_path = "~/.local/share/atuin/atuin.sock"
+socket_path = "~/.local/state/atuin/atuin.sock"
 
 ## Use systemd socket activation rather than opening the given path (the path must still be correct for the client)
 ## linux: false

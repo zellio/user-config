@@ -10,3 +10,5 @@ function wget --wraps wget
 
     command wget $wget_opts $argv
 end
+
+### wget.fish ends here

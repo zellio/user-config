@@ -9,35 +9,44 @@ color = true
 default_config_filename = "mise.toml"
 default_tool_versions_filename = ".tool-versions"
 http_timeout = "10s"
-idiomatic_version_file_enable_tools = ["go"]
+idiomatic_version_file_enable_tools = [
+    "go",
+]
+
+[settings.python]
+default_packages_file = "~/.config/python/default-requirements.txt"
+
+[settings.ruby]
+default_packages_file = "~/.config/ruby/default-gems"
+
+[settings.rust]
+cargo_home = "~/.local/share/cargo"
+rustup_home = "~/.local/share/rustup"
 
 [[tools."aqua:atuinsh/atuin"]]
-    version = "latest"
-
-[[tools."asdf:mise-plugins/mise-tmux"]]
-    version = "latest"
-
-[[tools.starship]]
     version = "latest"
 
 [[tools.go]]
     version = "latest"
 
-[[tools.poetry]]
+[[tools."pipx:python-poetry/poetry"]]
     version = "latest"
 
 [[tools.python]]
     version = "latest"
-    default_packages = ""
 
 [[tools.ruby]]
     version = "latest"
 
 [[tools.rust]]
     version = "latest"
-    cargo_home = "~/.local/share/cargo"
-    rustup_home = "~/.local/share/rustup"
     components = "cargo,clippy,rust-analysis,rust-analyzer,rust-docs,rust-src,rust-std,rustc,rustfmt"
 
-[[tools.usage]]
+[[tools."aqua:starship/starship"]]
     version = "latest"
+
+[[tools."asdf:mise-plugins/mise-tmux"]]
+    version = "latest"
+
+[[tools."cargo:usage-cli"]]
+    version =  "latest"

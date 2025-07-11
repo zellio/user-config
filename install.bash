@@ -2,7 +2,7 @@
 
 ### install.bash ---
 
-## Copyright (C) 2024 Zachary Elliott
+## Copyright (C) 2025 Zachary Elliott
 
 ### Commentary:
 
@@ -21,10 +21,16 @@ PROJECT_ROOT="${PROJECT_ROOT:-"$(
 	command cd -- "$(command dirname -- "${BASH_SOURCE[0]}")" && command pwd -P
 )"}"
 
-function print_header
+function report_info
 {
 	local msg="$*"
 	printf $'\e[38;2;0;255;0m==>\e[0m %s\n' "$msg"
+}
+
+function report_warning
+{
+	local msg="$*"
+	printf $'\e[38;2;255;255;0m==> WARNING:\e[0m %s\n' "$msg"
 }
 
 function report_action
@@ -35,7 +41,7 @@ function report_action
 
 function main
 {
-	print_header 'Building config map'
+	report_info 'Building config map'
 
 	local -A configs=(
 		["$HOME"/repos/zellio/zdotdir]="$HOME"/.config/zsh
@@ -68,20 +74,20 @@ function main
 		done
 	fi
 
-	print_header 'Linking config files'
+	report_info 'Linking config files'
 
 	local source_path target_path
 	for source_path in "${!configs[@]}"; do
 		target_path="${configs[$source_path]}"
 
 		if [ -L "$target_path" ]; then
+			report_action "Relinking ${target_path}"
 			command rm -- "$target_path"
-		fi
-
-		if [ -e "$target_path" ]; then
-			printf '  %s already exists, skipping' "$target_path"
+			command ln --symbolic -- "$source_path" "$target_path"
+		elif [ -e "$target_path" ]; then
+			report_warning "${target_path} already exists, skipping"
 		else
-			report_action "Linking $target_path"
+			report_action "Linking ${target_path}"
 			command ln --symbolic -- "$source_path" "$target_path"
 		fi
 	done
