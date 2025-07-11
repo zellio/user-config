@@ -1,0 +1,5 @@
+#!/usr/bin/env zsh
+
+command jobs -l
+
+### zsh ends here

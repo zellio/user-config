@@ -1,0 +1,5 @@
+#!/usr/bin/env zsh
+
+command atuin history list "$@"
+
+### history ends here

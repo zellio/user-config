@@ -1,0 +1,17 @@
+#!/usr/bin/env zsh
+
+local history_directory="$XDG_DATA_HOME"/rlwrap/history
+
+test -d "$history_directory" || mkdir -p "$history_directory"
+
+local command="$(basename "$1")"
+
+local -a rlwrap_args=(
+	--ansi-colour-aware
+	--complete-filenames
+	--histsize=10000
+	--history-no-dupes=1
+	--history-filename="${history_directory}/${command}"
+)
+
+command rlwrap "${rlwrap_args[@]}" "$@"

@@ -1,0 +1,3 @@
+#!/usr/bin/env zsh
+
+ZSH_PROFILERC=1 zsh --interactive --login -c 'exit'

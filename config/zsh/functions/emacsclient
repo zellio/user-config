@@ -1,0 +1,19 @@
+#!/usr/bin/env zsh
+
+if is_installed launchctl; then
+	EMACS_SOCKET_NAME='launchd-user.plist'
+elif is_installed systemctl; then
+	EMACS_SOCKET_NAME='systemd-user.service'
+else
+	EMACS_SOCKET_NAME='emacs-daemon'
+fi
+
+local -a emacsclient_opts=(
+	"--socket-name=$XDG_RUNTIME_DIR/emacs/$EMACS_SOCKET_NAME"
+	'--create-frame'
+	"--alternate-editor='emacs -nw'"
+)
+
+command emacsclient "${emacsclient_opts[@]}" "$@"
+
+### emacsclient ends here

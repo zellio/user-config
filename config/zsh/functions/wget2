@@ -1,0 +1,16 @@
+#!/usr/bin/env zsh
+
+WGET2_DATA_DIR="$XDG_DATA_HOME"/wget2
+
+[ ! -d "$WGET2_DATA_DIR" ] && mkdir -p "$WGET2_DATA_DIR"
+
+local -a wget2_opts=(
+	"--hsts-file=$WGET2_DATA_DIR/hsts"
+	"--hpkp-file=$WGET2_DATA_DIR/hpkp"
+	"--tls-session-file=$WGET2_DATA_DIR/tls-session"
+	"--ocsp-file=$WGET2_DATA_DIR/ocsp"
+)
+
+command wget2 "${wget2_opts[@]}" "$@"
+
+### wget2 ends here

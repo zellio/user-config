@@ -1,0 +1,5 @@
+#!/usr/bin/env zsh
+
+LC_COLLATE=C command ls --color=auto --classify=always "$@"
+
+### ls ends here

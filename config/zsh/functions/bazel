@@ -1,0 +1,9 @@
+#!/usr/bin/env zsh
+
+if is_installed bazelisk; then
+	bazelisk "$@"
+else
+	command bazel --bazelrc "${XDG_CONFIG_HOME}"/bazel/bazelrc "$@"
+fi
+
+### bazel ends here

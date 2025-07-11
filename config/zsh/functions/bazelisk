@@ -1,0 +1,5 @@
+#!/usr/bin/env zsh
+
+command bazelisk --bazelrc "${XDG_CONFIG_HOME}"/bazel/bazelrc "$@"
+
+### bazelisk ends here
