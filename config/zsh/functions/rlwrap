@@ -15,3 +15,5 @@ local -a rlwrap_args=(
 )
 
 command rlwrap "${rlwrap_args[@]}" "$@"
+
+### rlwrap ends here

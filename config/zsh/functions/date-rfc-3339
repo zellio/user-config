@@ -1,3 +1,5 @@
 #!/usr/bin/env zsh
 
 date -u '+%Y-%m-%dT%H:%M:%SZ'
+
+### date-rfc-3339 ends here

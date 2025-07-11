@@ -325,6 +325,12 @@ if is_installed 'docker'; then
 	typeset -gx COMPOSE_HTTP_TIMEOUT='120'
 fi
 
+CARGO_HOME="$HOME"/.local/share/cargo
+if [ -d "$CARGO_HOME" ]; then
+	path_user=($path_user "$CARGO_HOME")
+	typeset -gx CARGO_HOME
+fi
+
 if is_installed 'go'; then
     typeset -gx GOPROXY="${GOPROXY:-https://proxy.golang.org,direct}"
 fi
@@ -379,6 +385,12 @@ if is_installed 'ruby'; then
 	typeset -gx BUNDLE_USER_CACHE="$XDG_CACHE_HOME/bundle"
 	typeset -gx BUNDLE_USER_PLUGIN="$XDG_DATA_HOME/bundle"
 	typeset -gx SOLARGRAPH_CACHE="$XDG_CACHE_HOME/solargraph"
+fi
+
+RUSTUP_HOME="$HOME"/.local/share/rustup
+if [ -d "$RUSTUP_HOME" ]; then
+	path_user=($path_user "$RUSTUP_HOME")
+	typeset -gx RUSTUP_HOME
 fi
 
 if [ -n "$SSH_AUTH_SOCK" ]; then

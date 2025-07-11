@@ -16,7 +16,7 @@ typeset -gx XDG_RUNTIME_DIR="${XDG_RUNTIME_DIR:-/run/user/"$UID"}"
 ### ZSH Shell Parameters
 
 typeset -gx DIRSTACKSIZE=25
-typeset -gx HISTFILE="$XDG_DATA_DIR"/zsh/history
+typeset -gx HISTFILE="$XDG_DATA_HOME"/zsh/history
 typeset -gx HISTORY_IGNORE=' *|fc *'
 typeset -gx HISTSIZE=100000
 typeset -gx NULLCMD='cat'
