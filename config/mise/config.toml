@@ -13,6 +13,9 @@ idiomatic_version_file_enable_tools = [
     "go",
 ]
 
+[settings.pipx]
+uvx = true
+
 [settings.python]
 default_packages_file = "~/.config/python/default-requirements.txt"
 
@@ -23,16 +26,32 @@ default_packages_file = "~/.config/ruby/default-gems"
 cargo_home = "~/.local/share/cargo"
 rustup_home = "~/.local/share/rustup"
 
+### CLI Tools
+
 [[tools."aqua:atuinsh/atuin"]]
     version = "latest"
+
+[[tools."aqua:starship/starship"]]
+    version = "latest"
+
+[[tools."cargo:usage-cli"]]
+    version =  "latest"
+
+[[tools."asdf:mise-plugins/mise-tmux"]]
+    version = "latest"
+
+### Programming languages
 
 [[tools.go]]
     version = "latest"
 
-[[tools."pipx:python-poetry/poetry"]]
+[[tools.python]]
     version = "latest"
 
-[[tools.python]]
+[[tools."aqua:astral-sh/uv"]]
+    version = "latest"
+
+[[tools."pipx:python-poetry/poetry"]]
     version = "latest"
 
 [[tools.ruby]]
@@ -41,12 +60,3 @@ rustup_home = "~/.local/share/rustup"
 [[tools.rust]]
     version = "latest"
     components = "cargo,clippy,rust-analysis,rust-analyzer,rust-docs,rust-src,rust-std,rustc,rustfmt"
-
-[[tools."aqua:starship/starship"]]
-    version = "latest"
-
-[[tools."asdf:mise-plugins/mise-tmux"]]
-    version = "latest"
-
-[[tools."cargo:usage-cli"]]
-    version =  "latest"
