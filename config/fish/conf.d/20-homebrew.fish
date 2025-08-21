@@ -25,7 +25,7 @@ for gnubin_package in $gnubin_packages
     fish_add_path --path --prepend "$HOMEBREW_DIR/opt/$gnubin_package/libexec/gnubin"
 end
 
-set --local keg_only_packages 'berkeley-db@5' 'binutils' 'bison' 'curl' 'ed' 'expat' 'gnu-getopt' 'icu4c@77' 'jpeg' 'libarchive' 'libiconv' 'libomp' 'm4' 'ncurses' 'openblas' 'openjdk' 'readline' 'sqlite' 'unzip' 'zlib'
+set --local keg_only_packages 'berkeley-db@5' 'bison' 'curl' 'ed' 'expat' 'gnu-getopt' 'icu4c@77' 'jpeg' 'libarchive' 'libiconv' 'libomp' 'm4' 'ncurses' 'openblas' 'openjdk' 'readline' 'sqlite' 'unzip' 'zlib'
 for keg_only_package in $keg_only_packages
     fish_add_path --path --prepend "$HOMEBREW_DIR/opt/$keg_only_package/bin"
 end
