@@ -1,11 +1,11 @@
 #!/usr/bin/env fish
 
 function emacsclient --wraps emacsclient
-    set --local emacs_socket_name 'systemd-user.service'
+    set --local emacs_socket_name 'systemd-user.socket'
     if type -q launchctl
         set emacs_socket_name 'launchd-user.plist'
     else if type -q systemctl
-        set emacs_socket_name 'systemd-user.service'
+        set emacs_socket_name 'systemd-user.socket'
     end
 
     set --local emacsclient_opts "--socket-name=$XDG_RUNTIME_DIR/emacs/$emacs_socket_name"
