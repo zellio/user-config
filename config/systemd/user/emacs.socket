@@ -1,0 +1,11 @@
+[Unit]
+Description=Emacs Server socket
+Documentation=info:emacs man:emacs(1) https://gnu.org/software/emacs/
+Before=graphical-session-pre.target
+
+[Socket]
+DirectoryMode=0700
+ListenStream=%t/emacs/systemd-user.socket
+
+[Install]
+WantedBy=sockets.target
