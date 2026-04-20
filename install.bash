@@ -12,14 +12,28 @@
 
 set -o nounset -o errexit -o errtrace -o pipefail
 
-### Logging
+### Setting global variables
 
+declare -gx XDG_CACHE_HOME="${XDG_CACHE_HOME:-"$HOME"/.cache}"
 declare -gx XDG_CONFIG_HOME="${XDG_CONFIG_HOME:-"$HOME"/.config}"
+declare -gx XDG_DATA_HOME="${XDG_DATA_HOME:-"$HOME"/.local/share}"
+declare -gx XDG_STATE_HOME="${XDG_STATE_HOME:-"$HOME"/.local/state}"
+declare -gx XDG_BIN_DIR="${XDG_BIN_DIR:-"$HOME"/.local/bin}"
 
 declare PROJECT_ROOT
 PROJECT_ROOT="${PROJECT_ROOT:-"$(
 	command cd -- "$(command dirname -- "${BASH_SOURCE[0]}")" && command pwd -P
 )"}"
+
+declare -A SOURCE_MAP=(
+	["$XDG_CACHE_HOME"]='cache'
+	["$XDG_CONFIG_HOME"]='config'
+	["$XDG_DATA_HOME"]='local/share'
+	["$XDG_STATE_HOME"]='local/state'
+	["$XDG_BIN_DIR"]='local/bin'
+)
+
+### Logging
 
 function report_info
 {
@@ -43,8 +57,12 @@ function main
 {
 	report_info 'Building config map'
 
+	if [ "$(uname -s)" = 'Darwin' ]; then
+		report_action 'Adding Darwin specific launch agents to search set'
+		SOURCE_MAP["$HOME"/Library/LaunchAgents]='Library/LaunchAgents'
+	fi
+
 	local -A configs=(
-		["$HOME"/repos/zellio/zdotdir]="$HOME"/.config/zsh
 		["$HOME"/repos/zellio/emacs-config]="$HOME"/.config/emacs
 	)
 
@@ -55,24 +73,26 @@ function main
 		'zshenv'
 	)
 
-	report_action 'Adding xdg_config directory configs'
-
 	local config
 	for config in "${home_directory_configs[@]}"; do
 		configs["${PROJECT_ROOT}/${config}"]="${HOME}/.${config}"
 	done
 
-	for config in "$PROJECT_ROOT"/config/*; do
-		configs["$config"]="${XDG_CONFIG_HOME}/$(command basename -- "$config")"
-	done
+	local key value
+	local -a discovered source
+	for key in "${!SOURCE_MAP[@]}"; do
+		value="${SOURCE_MAP[$key]}"
+		[ -d "$value" ] || continue
 
-	if [ "$(uname -s)" = 'Darwin' ]; then
-		report_action 'Adding launch agent configs'
+		report_action "Processing source map: $value"
 
-		for config in "$PROJECT_ROOT"/Library/LaunchAgents/*.plist; do
-			configs[$config]="${HOME}/Library/LaunchAgents/$(command basename -- "$config")"
+		readarray -t -d$'\n' discovered < <(
+			find "${PROJECT_ROOT}/${value}" -mindepth 1 -maxdepth 1
+		)
+		for source in "${discovered[@]}"; do
+			configs[$source]="${key}/$(basename "$source")"
 		done
-	fi
+	done
 
 	report_info 'Linking config files'
 
